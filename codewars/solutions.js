@@ -56,3 +56,29 @@ function findEvenIndex(arr) {
     }
     return index
 }
+
+// Bit Counting
+
+var countBits=function(n) {
+    // Program Me
+    let count=0
+    //   convert to base 2 number system
+    const binary=n.toString(2)
+
+    let j=0
+    while(j<binary.length) {
+        if(binary[j]==='1') count++
+        j++
+    }
+    // return count
+
+    // short way
+    return n.toString(2).split(0).join('').length
+
+};
+
+// Replace With Alphabet Position
+const alphabetPosition=text => text.toLowerCase()
+    .replace(/[^a-z]/g,'')
+    .split('')
+    .map((letter) => letter.charCodeAt(0)-96).join(' ')
