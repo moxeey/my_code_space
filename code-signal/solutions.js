@@ -41,3 +41,53 @@ const solution2=(a) => {
         a[i].reverse()
     return a
 }
+
+// Sudoku2
+function solution(grid) {
+    return (checkRows(grid)
+        &&checkRows(rotateGrid(grid))
+        &&checkRows(convertSubGridstoRows(grid)))
+}
+
+const checkRows=(rows) => {
+    for(let i=0;i<rows.length;i++) {
+        for(let n=1;n<=9;n++) {
+            // check rows
+            if(rows[i].join('').indexOf(n)!==rows[i].join('').lastIndexOf(n)) {
+                return false
+            }
+        }
+    }
+    return true
+}
+
+const rotateGrid=(grid) => {
+    for(let i=0;i<grid.length;i++)
+        for(let j=0;j<i;j++) {
+            let temp=grid[i][j]
+            grid[i][j]=grid[j][i]
+            grid[j][i]=temp
+        }
+    for(let i=0;i<grid.length;i++)
+        grid[i].reverse()
+    return grid
+
+}
+
+const convertSubGridstoRows=(grid) => {
+    let subGrids=[]
+    let currSub=[]
+    let subIndex=0
+    while(subIndex<9) {
+        for(let j=0;j<9;j++) {
+            currSub.push(...grid[j].slice(subIndex,subIndex+3))
+            if((j+1)%3===0) {
+                subGrids.push(currSub)
+                currSub=[]
+            }
+        }
+        subIndex+=3
+    }
+    return subGrids
+}
+// Sudoku2 end
